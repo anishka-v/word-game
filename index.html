@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Word Games</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 25x;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width:800px) {
+  .column {
+    width: 100%;
+  }
+}
+</style>
+<body>
+
+<!-- Header -->
+<header class="w3-container w3-red w3-center" style="padding:65px 16px">
+  <h1 class="w3-margin w3-jumbo">Unscramble the Country</h1>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-30 w3-container w3-center">
+  <div class="w3-content">
+    <div class="w3-third w3-center"></div>
+      <h5 class="w3-padding-32">Directions: Unscramble the country name and enter it below</h5>
+    </div>
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+      <div class="row">
+        <div class="column">
+            {% if heading %}
+        <h1>{{heading}}</h1>
+            {% endif %}
+           {% if country1 %}
+        <p class="w3-text-grey"> {{country1}} </p>
+        {% endif %}
+            <form action="/answer1" method="POST" name="answer_form">
+    <input type="text" name="answer1">
+</form>
+  </div>
+
+  <div class="column">
+    <h1>Time remaining: </h1>
+    <p id="demo"></p>
+  </div>
+
+  <div class="column">
+    <h1>Score: </h1>
+       <div class="w3-third w3-center">
+            {% if correct %}
+         <p class=" w3-text-red"> Correct: {{correct}} , Incorrect: {{incorrect}} </p>
+            {% else %}
+            <p class=" w3-text-red"> Correct: {{correct}} , Incorrect: {{incorrect}} </p>
+            {% endif %}
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge"></h1>
+</div>
+
+<script>
+
+setInterval(myTimer, 1000);
+
+var i = 1;
+function myTimer() {
+  var d = 20;
+  d = d - i;
+  i += 1;
+  if (d == 0) {
+    document.answer_form.submit()
+}
+  document.getElementById("demo").innerHTML = d.toString();
+
+}
+</script>
+
+
+</body>
+</html>
