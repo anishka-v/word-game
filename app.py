@@ -1,7 +1,9 @@
-from flask import Flask
+from flask import Flask, make_response
 from flask import render_template
 from flask import request
 import random
+
+cookie_value = random.randint(1000, 1000000000)
 
 def scramble(word):
     output = ""
@@ -62,24 +64,37 @@ app = Flask(__name__)
 def index():
     global z
     z = get_country()
-    return render_template("index.html", country1 = z, heading = "Start", correct = 0, incorrect=0)
+    resp = make_response(render_template("index.html", country1 = z, heading = "Start", correct = 0, incorrect=0))
+    cookie_string = request.headers.get('Cookie')
+    if cookie_string is None:
+        print (cookie_string)
+        resp.set_cookie('usercookie', str(cookie_value))
+    else:
+        cookie_string = request.headers.get('Cookie')
+        split_cookies = cookie_string.split('=')
+        dict_cookies[split_cookies[1]] = [0, 0]
+    return resp
 
-correct = 0
-incorrect = 0
+dict_cookies = {}
 
 @app.route('/answer1', methods = ['POST'])
 def answer1():
     answer = request.form['answer1']
     global z
-    global correct
-    global incorrect
+    cookie_string = request.headers.get('Cookie')
+    split_cookies = cookie_string.split('=')
+    list_cookies = dict_cookies[split_cookies[1]]
+    correct = list_cookies[0]
+    incorrect = list_cookies[1]
     if answer.lower() == game(z):
         correct += 1
+        dict_cookies[split_cookies[1]] = [correct, incorrect]
         z = get_country()
         return render_template("index.html", country1 = z, heading = "Correct", correct=correct, incorrect=incorrect )
     else:
         z = get_country()
         incorrect += 1
+        dict_cookies[split_cookies[1]] = [correct, incorrect]
         return render_template("index.html", country1 = z, heading = "Incorrect", correct=correct, incorrect=incorrect)
 
 if __name__ == '__main__':
