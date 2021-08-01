@@ -31,6 +31,17 @@ body {
   clear: both;
 }
 
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("/static/map.jpg");
+  min-height: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width:800px) {
   .column {
@@ -40,78 +51,41 @@ body {
 </style>
 <body>
 
-<!-- Header -->
-<header class="w3-container w3-red w3-center" style="padding:65px 16px">
-  <h1 class="w3-margin w3-jumbo">Unscramble the Country</h1>
+
+<header class="w3-container w3-center" style="padding:50px 16px; background-color: #8acbde;">
+  <h1 class="w3-margin w3-xxxlarge">Word Games</h1>
 </header>
 
 <!-- First Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-30 w3-container w3-center">
   <div class="w3-content">
     <div class="w3-third w3-center"></div>
-      <h5 class="w3-padding-32">Directions: Unscramble the country name and enter it below</h5>
-    </div>
-  </div>
-</div>
-
-<!-- Second Grid -->
-<div class="w3-row-padding w3-padding-64 w3-container">
-  <div class="w3-content">
-      <div class="row">
-        <div class="column">
-            {% if heading %}
-        <h1>{{heading}}</h1>
-            {% endif %}
-           {% if country1 %}
-        <p class="w3-text-grey"> {{country1}} </p>
-        {% endif %}
-            <form action="/answer1" method="POST" name="answer_form">
-    <input type="text" name="answer1">
-</form>
-  </div>
-
-  <div class="column">
-    <h1>Time remaining: </h1>
-    <p id="demo"></p>
-  </div>
-
-  <div class="column">
-    <h1>Score: </h1>
-       <div class="w3-third w3-center">
-            {% if correct %}
-         <p class=" w3-text-red"> Correct: {{correct}} , Incorrect: {{incorrect}} </p>
-            {% else %}
-            <p class=" w3-text-red"> Correct: {{correct}} , Incorrect: {{incorrect}} </p>
-            {% endif %}
-    </div>
-  </div>
-</div>
+      <h5 class="w3-padding-24">Play fun and educational word games here</h5>
     </div>
   </div>
 </div>
 
 
-<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
-    <h1 class="w3-margin w3-xlarge"></h1>
-</div>
+<div class="w3-row-padding">
+      <div class="w3-col l2 m3 w3-padding-64"></div>
+    <div class="w3-col l3 m6 w3-padding-64">
+      <img src="/static/globe1.jpeg" alt="John" style="max-width:45%; max-height:45%"> <br><br>
+      <h3>Country Unscramble</h3>
+      <p> Test your knowledge of countries by unscrambling country names in 20 seconds.</p>
+        <p><a href="/country_unscramble"><button class="w3-button w3-light-grey w3-block">Start</button></a></p>
+    </div>
+          <div class="w3-col l2 m3 w3-padding-64"></div>
+    <div class="w3-col l3 m6 w3-padding-64">
+      <img src="/static/puzzle.jpg" alt="Jane" style="max-width:51.5%; max-height:51%.5">
+      <h3>Hangman</h3>
+      <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+      <p><button class="w3-button w3-light-grey w3-block">Start</button></p>
+    </div>
+  </div>
 
-<script>
 
-setInterval(myTimer, 1000);
-
-var i = 1;
-function myTimer() {
-  var d = 20;
-  d = d - i;
-  i += 1;
-  if (d == 0) {
-    document.answer_form.submit()
-}
-  document.getElementById("demo").innerHTML = d.toString();
-
-}
-</script>
-
+<!-- Footer -->
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-48"></div>
 
 </body>
 </html>
