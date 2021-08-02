@@ -68,7 +68,7 @@ def index():
     resp = make_response(render_template("country_unscramble.html", country1 = z[0], heading = "Question 1", correct = 0, incorrect=0))
     cookie_string = request.headers.get('Cookie')
     if cookie_string is None:
-        print (cookie_string)
+        print (cookie_string) #prints None
         cookie_value = random.randint(1000, 1000000000)
         print (cookie_value)
         resp.set_cookie('usercookie', str(cookie_value))
@@ -85,15 +85,16 @@ dict_cookies = {}
 
 @app.route('/answer1', methods = ['POST'])
 def answer1():
+    print ("Answer page")
     answer = request.form['answer1']
+    print (dict_cookies)
     cookie_string = request.headers.get('Cookie')
     split_cookies = cookie_string.split('=')
+    print (split_cookies)
     list_cookies = dict_cookies[split_cookies[1]]
-
     correct = list_cookies[0]
     incorrect = list_cookies[1]
     correct_answer = list_cookies[2]
-    print (dict_cookies)
     if answer.lower() == (correct_answer.lower()):
         correct += 1
         z = get_country()
