@@ -90,22 +90,23 @@ def answer1():
     print (dict_cookies)
     cookie_string = request.headers.get('Cookie')
     split_cookies = cookie_string.split('=')
-    print (split_cookies) #Usercookie:
-    list_cookies = dict_cookies.get(split_cookies[1])
-    #list_cookies = dict_cookies[split_cookies[1]]
-    correct = list_cookies[0]
-    incorrect = list_cookies[1]
-    correct_answer = list_cookies[2]
-    if answer.lower() == (correct_answer.lower()):
-        correct += 1
-        z = get_country()
-        dict_cookies[split_cookies[1]] = [correct, incorrect, z[1]]
-        return render_template("country_unscramble.html", country1 = z[0], heading = "Correct", correct=correct, incorrect=incorrect )
-    else:
-        z = get_country()
-        incorrect += 1
-        dict_cookies[split_cookies[1]] = [correct, incorrect, z[1]]
-        return render_template("country_unscramble.html", country1 = z[0], heading = "Incorrect, the correct answer was " + correct_answer , correct=correct, incorrect=incorrect)
+    print (split_cookies)
+    key = split_cookies[1]
+    if key in dict_cookies:
+        list_cookies = dict_cookies[split_cookies[1]]
+        correct = list_cookies[0]
+        incorrect = list_cookies[1]
+        correct_answer = list_cookies[2]
+        if answer.lower() == (correct_answer.lower()):
+            correct += 1
+            z = get_country()
+            dict_cookies[split_cookies[1]] = [correct, incorrect, z[1]]
+            return render_template("country_unscramble.html", country1 = z[0], heading = "Correct", correct=correct, incorrect=incorrect )
+        else:
+            z = get_country()
+            incorrect += 1
+            dict_cookies[split_cookies[1]] = [correct, incorrect, z[1]]
+            return render_template("country_unscramble.html", country1 = z[0], heading = "Incorrect, the correct answer was " + correct_answer , correct=correct, incorrect=incorrect)
 
 if __name__ == '__main__':
     app.run()
