@@ -3,8 +3,6 @@ from flask import render_template
 from flask import request
 import random
 
-cookie_value = random.randint(1000, 1000000000)
-
 def scramble(word):
     output = ""
     length = len(word)
@@ -65,13 +63,18 @@ def start():
 
 @app.route('/country_unscramble', methods = ['GET'])
 def index():
-    print ("get index page")
+    print ("get country unscramble page")
     z = get_country()
     resp = make_response(render_template("country_unscramble.html", country1 = z[0], heading = "Question 1", correct = 0, incorrect=0))
     cookie_string = request.headers.get('Cookie')
     if cookie_string is None:
         print (cookie_string)
+        cookie_value = random.randint(1000, 1000000000)
+        print (cookie_value)
         resp.set_cookie('usercookie', str(cookie_value))
+        cookieValuestring = str(cookie_value)
+        dict_cookies[cookieValuestring] = [0, 0, z[1]]
+        print (dict_cookies)
     else:
         cookie_string = request.headers.get('Cookie')
         split_cookies = cookie_string.split('=')
@@ -83,10 +86,10 @@ dict_cookies = {}
 @app.route('/answer1', methods = ['POST'])
 def answer1():
     answer = request.form['answer1']
-    print ("User answer " + answer)
     cookie_string = request.headers.get('Cookie')
     split_cookies = cookie_string.split('=')
     list_cookies = dict_cookies[split_cookies[1]]
+
     correct = list_cookies[0]
     incorrect = list_cookies[1]
     correct_answer = list_cookies[2]
