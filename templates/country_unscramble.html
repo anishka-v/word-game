@@ -86,9 +86,10 @@ body {
     <p class="w3-text-black w3-xlarge"> <strong> Scrambled country name:&emsp; </strong> {{country1}} </p>
     {% endif %}
     <form action="/answer1" method="POST" name="answer_form">
-    <input type="text" name="answer1" placeholder="Enter answer" class = "w3-center"></form> <br>
+        <input type="text" name="answer1" placeholder="Enter answer" class = "w3-center">&emsp;
+        <input type="submit" value="Submit"></form>
     </div>
-
+<br>
 <footer class="w3-container w3-grey w3-round-large">
     {% if heading %}
     <h5>{{heading}}</h5>
