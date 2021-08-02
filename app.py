@@ -3,6 +3,8 @@ from flask import render_template
 from flask import request
 import random
 
+dict_cookies = {}
+
 def scramble(word):
     output = ""
     length = len(word)
@@ -74,19 +76,19 @@ def index():
         resp.set_cookie('usercookie', str(cookie_value))
         cookieValuestring = str(cookie_value)
         dict_cookies[cookieValuestring] = [0, 0, z[1]]
-        print(dict_cookies)
     else:
         cookie_string = request.headers.get('Cookie')
         split_cookies = cookie_string.split('=')
         dict_cookies[split_cookies[1]] = [0, 0, z[1]]
+    print("DICTIONARY: ")
+    print(dict_cookies)
     return resp
-
-dict_cookies = {}
 
 @app.route('/answer1', methods = ['POST'])
 def answer1():
     print ("Answer page")
     answer = request.form['answer1']
+    print ("DICTIONARY: ")
     print (dict_cookies)
     cookie_string = request.headers.get('Cookie')
     split_cookies = cookie_string.split('=')
