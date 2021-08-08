@@ -60,9 +60,9 @@ body {
   </div>
 <br><br><br>
 <!-- Second Grid -->
-<div class = "row">
-    <div class = "column" style="padding: 30px; display: inline-block; width: 20%"> </div>
-<div class = "column w3-round-large" style="padding: 30px; background-color: #BCC6CC; display: inline-block; width: 17%; height: 125px;">
+<div class = "row" style="flex-direction: row;  display:flex;">
+    <div class = "column" style="padding: 30px; display: inline-block; width: 20%;"> </div>
+<div class = "column w3-round-large" style="padding:30px; background-color: #BCC6CC; display: inline-block; width:250px; height:130px;">
 <div class="card">
     {% if correct %}
     <p> Correct: {{correct}} &emsp;&emsp;Incorrect: {{incorrect}} </p>
@@ -71,8 +71,8 @@ body {
     {% endif %}
 </div>
 </div>
-    <div class = "column" style="padding: 30px; display: inline-block; width: 27%"> </div>
-<div class = "column w3-round-large" style="padding: 30px; background-color: #98AFC7; display: inline-block; width: 16%; height: 125px;">
+    <div class = "column" style="padding: 30px; display: inline-block; width:24%;"> </div>
+<div class = "column w3-round-large" style="padding:30px; background-color: #98AFC7; display: inline-block; width:250px; height:135px;">
     <div class = "card ">
     <i class="material-icons w3-xxlarge">timer</i>
     <p id="demo">20</p>
