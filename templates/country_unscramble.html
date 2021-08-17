@@ -20,10 +20,35 @@ body {
   margin: 0;
 }
 
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #C0C0C0;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
 .column {
   float: left;
   width: 33.33%;
-  padding: 25x;
+}
+
+.row {
+    margin: 0 -5px;
 }
 
 .row:after {
@@ -32,22 +57,37 @@ body {
   clear: both;
 }
 
-.bgimg {
-  background-position: center;
-  background-size: cover;
-  background-image: url("/static/map.jpg");
-  min-height: 50%;
-}
-
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width:800px) {
   .column {
     width: 100%;
+    display: block;
+    margin-bottom: 20px;
   }
 }
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.column-66 {
+  float: left;
+  width: 66.66666%;
+  padding: 20px;
+}
+
+.container {
+  padding: 0px;
+}
+
+
 </style>
 
-<header class="w3-container w3-center" style="padding:50px 16px;  background-color: #8acbde;">
+<header class="w3-container w3-center" style="padding:25px 16px;  background-color: #8acbde;">
   <h1 class="w3-margin w3-xxxlarge">Unscramble the Country</h1>
 </header>
 
@@ -58,63 +98,71 @@ body {
       <h5 class="w3-padding-24">Directions:&nbsp Unscramble the country name and enter it below within 20 seconds</h5>
     </div>
   </div>
-<br><br><br>
-<!-- Second Grid -->
-<div class = "row" style="flex-direction: row;  display:flex;">
-    <div class = "column" style="padding: 30px; display: inline-block; width: 20%;"> </div>
-<div class = "column w3-round-large" style="padding:30px; background-color: #BCC6CC; display: inline-block; width:250px; height:130px;">
-<div class="card">
-    {% if correct %}
-    <p> Correct: {{correct}} &emsp;&emsp;Incorrect: {{incorrect}} </p>
-    {% else %}
-    <p> Correct: {{correct}} &emsp;&emsp;Incorrect: {{incorrect}} &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p>
-    {% endif %}
 </div>
-</div>
-    <div class = "column" style="padding: 30px; display: inline-block; width:24%;"> </div>
-<div class = "column w3-round-large" style="padding:30px; background-color: #98AFC7; display: inline-block; width:250px; height:135px;">
-    <div class = "card ">
-    <i class="material-icons w3-xxlarge">timer</i>
-    <p id="demo">20</p>
+
+
+
+<div class="row">
+  <div class="column" passding:20px>
+    <div class="card">
+
+            {% if correct %}
+                <p> Correct: {{correct}} &emsp;&emsp;Incorrect: {{incorrect}} </p>
+            {% else %}
+                <p> Correct: {{correct}} &emsp;&emsp;Incorrect: {{incorrect}} &emsp;</p>
+            {% endif %}
+
+            <br><br>
     </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+        <i class="material-icons w3-xxlarge">timer</i>
+        <p id="demo">20</p>
+    </div>
+  </div>
+  
 </div>
-</div>
-<br>
-<div class="w3-card-4 w3-round-large" style="width:60%; margin-left: auto; margin-right:auto;">
-<div class="w3-container">
-     {% if country1 %}
-    <p class="w3-text-black w3-xlarge"> <strong> Scrambled country name:&emsp; </strong> {{country1}} </p>
-    {% endif %}
-    <form action="/answer1" method="POST" name="answer_form">
+
+
+<br> <br><br><br>
+
+<!-- The App Section -->
+<div class="container">
+  <div class="row">
+    <div class="column-66">
+    	 {% if country1 %}
+    		<p class="w3-text-black w3-xlarge"> <strong> Scrambled country:&emsp; </strong> {{country1}} </p>
+    	{% endif %}
+    	<form action="/answer1" method="POST" name="answer_form">
         <input type="text" name="answer1" placeholder="Enter answer" class = "w3-center">&emsp;
         <input type="submit" value="Submit"></form>
     </div>
-<br>
-<footer class="w3-container w3-grey w3-round-large">
-    {% if heading %}
-    <h5>{{heading}}</h5>
-    {% endif %}
-    </footer>
+
+	<footer class="w3-container w3-round-small">
+    	{% if heading %}
+    		<h5>{{heading}}</h5>
+    	{% endif %}
+    	</footer>
+  </div>
 </div>
 
 <br> <br><br><br>
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-48"></div>
 
 <script>
-
-setInterval(myTimer, 1000);
-
-var i = 1;
-function myTimer() {
-  var d = 20;
-  d = d - i;
-  i += 1;
-  if (d == 0) {
-    document.answer_form.submit()
-}
-  document.getElementById("demo").innerHTML = d.toString();
-
-}
+	setInterval(myTimer, 1000);
+	var i = 1;
+	function myTimer() {
+  		var d = 20;
+  		d = d - i;
+  		i += 1;
+  		if (d == 0) {
+    		document.answer_form.submit()
+	}
+  	document.getElementById("demo").innerHTML = d.toString();
+	}
 </script>
 
 
