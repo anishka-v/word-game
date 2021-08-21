@@ -130,14 +130,14 @@ def answer1():
     if answer.lower() == (correct_answer.lower()):
         correct += 1
         z = get_country()
-        #print ("correct answer, question is ")
-        #print (split_cookies[1], correct_answer, z[1])
+        print ("correct answer, question is ")
+        print (split_cookies[1], correct_answer, z[1])
         setCookie(split_cookies[1], correct, incorrect, z[1])
         return render_template("country_unscramble.html", country1 = z[0], heading = "Correct", correct=correct, incorrect=incorrect )
     else:
         z = get_country()
         incorrect += 1
-        #print (split_cookies[1], correct_answer, z[0], z[1])
+        print (split_cookies[1], correct_answer, z[0], z[1])
         setCookie(split_cookies[1], correct, incorrect, z[1])
         return render_template("country_unscramble.html", country1 = z[0], heading = "Incorrect, the correct answer was " + correct_answer , correct=correct, incorrect=incorrect)
 
