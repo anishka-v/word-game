@@ -87,15 +87,20 @@ input[type=submit] {
 
 </style>
 
+<!-- Navbar -->
+<div class="w3-bar" style="background-color: #8acbde;">
+  <a href="/" class="w3-bar-item w3-button w3-padding-large">Home</a>
+<br>
 <header class="w3-container w3-center" style="padding:25px 16px;  background-color: #8acbde;">
-  <h1 class="w3-margin w3-xxxlarge">Unscramble the Country</h1>
+  <h1 class="w3-margin w3-xxxlarge">Unscramble the Country</h1> <br>
 </header>
+</div>
 
 <!-- First Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-30 w3-container w3-center">
   <div class="w3-content">
     <div class="w3-third w3-center"></div>
-      <h5 class="w3-padding-24">Directions:&nbsp Unscramble the country name and enter it below within 20 seconds</h5>
+      <h5 class="w3-padding-24">Directions:&nbsp Unscramble the country name and enter it below within 30 seconds</h5>
     </div>
   </div>
 </div>
@@ -119,7 +124,7 @@ input[type=submit] {
   <div class="column">
     <div class="card">
         <i class="material-icons w3-xxlarge">timer</i>
-        <p id="demo">20</p>
+        <p id="demo">30</p>
     </div>
   </div>
 
@@ -155,7 +160,7 @@ input[type=submit] {
 	setInterval(myTimer, 1000);
 	var i = 1;
 	function myTimer() {
-  		var d = 20;
+  		var d = 30;
   		d = d - i;
   		i += 1;
   		if (d == 0) {
